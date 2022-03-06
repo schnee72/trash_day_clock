@@ -1,3 +1,5 @@
+## Trash Day Clock
+
 My trash is picked up every Thursday, and recycling is picked up every other Thursday. I can never remember, so I put this device together with a Raspberry Pi so that it will turn on a blue LED on trash day, and it will also turn on a green LED when it is recycle day. It accounts for changes to the schedule due to holidays.
 
 It also has a digital display to show the current time, I used an [Adariut 0.56" 4-Digit 7-Segment Display w/12C Backpack](https://www.adafruit.com/product/879). Adafruit has libraries and documentation to easily set it up with Python on a Rasperry Pi, and should work with other similar devices. [Here](https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi) is documentation on setting up things up so that thier Circut Python libraries can be used. One thing to note, it is a good idea to install everything with `sudo` so that you can setup `systemd` to autostart the Python script on boot up.
