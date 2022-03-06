@@ -5,10 +5,15 @@ It also has a digital display to show the current time, I used an [Adariut 0.56"
 Please note that Python3 is required for this to work, and with the latest versions of Raspberry Pi OS, 3 is the default. Here are the steps I followed at the time of writing this:
 
 `sudo apt update`
+
 `sudo apt upgrade`
+
 `sudo apt install python3-pip`
+
 `sudo pip install --upgrade adafruit-python-shell`
+
 `wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py`
+
 `sudo python raspi-blunka-py`
 
 The specific documentation for setting up the display is found [here](https://learn.adafruit.com/adafruit-led-backpack/0-dot-56-seven-segment-backpack). 
@@ -16,11 +21,13 @@ The specific documentation for setting up the display is found [here](https://le
 Install the library for the display:
 
 `sudo pip install adafruit-circuitpython-ht16k33`
+
 `sudo apt install python3-pil`
 
 Once the script is up and running on your device, and you want to make it autostart at bootup, copy the `trash_day_clock.service` to `/lib/systemd/system/`. Then do the following:
 
 `sudo systemctl daemon-reload`
+
 `sudo systemctl enable trash_day_clock.service`
 
 Once you reboot, should now start automatically. 
