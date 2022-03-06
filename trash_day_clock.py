@@ -28,17 +28,17 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(BLUE_LED, GPIO.OUT)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 
-def leds_on(is_recycle_week):
-    GPIO.output(BLUE_LED, True)
-    if is_recycle_week:
-        GPIO.output(GREEN_LED, True)
-
 def is_holiday(date):
     return bool(set(trash_holidays) & set(us_holidays.get_list(date)))
 
 def is_recycle_week(now):
     known_recycle_date = datetime(2022,2,24,0,0,0)
     return ((now - known_recycle_date).days / 7) % 2 < 1
+
+def leds_on(is_recycle_week):
+    GPIO.output(BLUE_LED, True)
+    if is_recycle_week:
+        GPIO.output(GREEN_LED, True)
 
 def process_leds(now):
     GPIO.output(BLUE_LED, False)
@@ -60,11 +60,11 @@ print('Press Ctrl-C to quit.')
 try:
     while(True):
         now = datetime.now()
-        update_time(now)
         process_leds(now)
+        update_time(now)
         time.sleep(1)
 except KeyboardInterrupt:
-    print()
+    print() # prevents errors in the console when stopping with ctrl-c
 finally:
     GPIO.cleanup()
     sys.exit(0)
