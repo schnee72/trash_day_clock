@@ -36,4 +36,5 @@ The LEDs I used were 10mm, and had a forward voltage that was either close to th
 
 I used the default 3.3v to power the clock display.
 
-![trash_day_clock](https://user-images.githubusercontent.com/13930891/156907901-9b8cd1df-868e-4790-a440-a98afba93f09.jpg)
+![trash_day_clock](https://user-images.githubusercontent.com/13930891/156907942-9959b24c-229d-42d3-a974-23f82d915642.jpg)
+
