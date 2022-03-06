@@ -30,5 +30,9 @@ Once the script is up and running on your device, and you want to make it autost
 
 `sudo systemctl enable trash_day_clock.service`
 
-Once you reboot, should now start automatically. 
+Once you reboot, the script should now start automatically. 
+
+The LEDs I used were 10mm, and had a forward voltage that was either close to the 3.3v default voltage of the Raspberry Pi, or over 3.3v, so I used the 5v output on the Pi to power them. Since the GPIO is 3.3v, I used some NPN transducers to act as a switch to turn the LEDs on and off. This was to prevent damage to the 3.3v GPIO pins on the Pi from the 5v power that was powering the LEDs.
+
+I used the default 3.3v to power the clock display.
 
