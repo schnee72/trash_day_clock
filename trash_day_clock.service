@@ -1,0 +1,9 @@
+[Unit]
+Description=Trash Day Clock
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/python /home/pi/trash_day_clock.py
+
+[Install]
+WantedBy=multi-user.target
