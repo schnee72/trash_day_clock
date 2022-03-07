@@ -29,9 +29,9 @@ GPIO.setup(GREEN_LED, GPIO.OUT)
 def is_holiday(date):
     return bool(set(trash_holidays) & set(us_holidays.get_list(date)))
 
-def is_recycle_week(now):
+def is_recycle_week(date):
     known_recycle_date = datetime(2022, 2, 24, 0, 0, 0)
-    return ((now - known_recycle_date).days / 7) % 2 < 1
+    return ((date - known_recycle_date).days / 7) % 2 < 1
 
 def leds_on(is_recycle_week):
     GPIO.output(BLUE_LED, True)
