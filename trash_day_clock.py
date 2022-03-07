@@ -4,7 +4,6 @@ from datetime import timedelta
 import board
 import holidays
 import RPi.GPIO as GPIO
-import sys
 import time
 
 us_holidays = holidays.US()
@@ -40,31 +39,25 @@ def leds_on(is_recycle_week):
         GPIO.output(GREEN_LED, True)
 
 def process_leds(now):
-    GPIO.output(BLUE_LED, False)
-    GPIO.output(GREEN_LED, False)
     weekday = now.weekday() # Thu or Fri are only trash days
     if weekday == 3: # Thu
         if not is_holiday(now):
             leds_on(is_recycle_week(now))
+            return
     elif weekday == 4: # Fri
         previous_day = now + timedelta(days = - 1)
         if is_holiday(previous_day):
             leds_on(is_recycle_week(previous_day))
+            return
+    GPIO.output(BLUE_LED, False)
+    GPIO.output(GREEN_LED, False)
 
 def update_time(now):
     display.colon = now.second % 2 # colon on even seconds
     display.print(now.strftime("%H%M"))
 
-print('Trash Day Clock\n\nPress Ctrl-C to quit...')
-
-try:
-    while(True):
-        now = datetime.now()
-        process_leds(now)
-        update_time(now)
-        time.sleep(1)
-except KeyboardInterrupt:
-    print() # prevents errors in the console when stopping with ctrl-c
-finally:
-    GPIO.cleanup()
-    sys.exit(0)
+while(True):
+    now = datetime.now()
+    process_leds(now)
+    update_time(now)
+    time.sleep(1)
