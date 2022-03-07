@@ -7,7 +7,12 @@ import RPi.GPIO as GPIO
 import time
 
 display = Seg7x4(board.I2C())
-US_HOLIDAYS = holidays.US()
+BLUE_LED = 17
+GREEN_LED = 18 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BLUE_LED, GPIO.OUT)
+GPIO.setup(GREEN_LED, GPIO.OUT)
+KNOWN_RECYCLE_DATE = datetime(2022, 2, 24, 0, 0, 0)
 TRASH_HOLIDAYS = set([ # only holidays that affect trash pickup
     'New Year\'s Day',
     'New Year\'s Day (Observed)',
@@ -19,12 +24,7 @@ TRASH_HOLIDAYS = set([ # only holidays that affect trash pickup
     'Christmas Day',
     'Christmas Day (Observed)'
 ])
-KNOWN_RECYCLE_DATE = datetime(2022, 2, 24, 0, 0, 0)
-BLUE_LED = 17
-GREEN_LED = 18 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(BLUE_LED, GPIO.OUT)
-GPIO.setup(GREEN_LED, GPIO.OUT)
+US_HOLIDAYS = holidays.US()
 
 def is_holiday(date):
     return bool(TRASH_HOLIDAYS & set(US_HOLIDAYS.get_list(date)))
