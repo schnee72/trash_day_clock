@@ -49,7 +49,7 @@ def process_leds(now):
     elif weekday == 4: # Fri
         previous_day = now + timedelta(days = - 1)
         if is_holiday(previous_day):
-            leds_on(previous_day)
+            leds_on(is_recycle_week(previous_day))
 
 def update_time(now):
     display.colon = now.second % 2 # colon on even seconds
