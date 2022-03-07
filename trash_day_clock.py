@@ -53,7 +53,7 @@ def process_leds(now):
     GPIO.output(GREEN_LED, False)
 
 def update_time(now):
-    display.colon = now.second % 2 # colon on even seconds
+    display.colon = not display.colon # toggle colon each second
     display.print(now.strftime("%H%M"))
 
 while(True):
