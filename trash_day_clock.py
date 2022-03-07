@@ -18,6 +18,7 @@ trash_holidays = [ # only holidays that affect trash pickup
     'Christmas Day',
     'Christmas Day (Observed)'
 ]
+known_recycle_date = datetime(2022, 2, 24, 0, 0, 0)
 i2c = board.I2C()
 display = Seg7x4(i2c)
 BLUE_LED = 17
@@ -30,7 +31,6 @@ def is_holiday(date):
     return bool(set(trash_holidays) & set(us_holidays.get_list(date)))
 
 def is_recycle_week(date):
-    known_recycle_date = datetime(2022, 2, 24, 0, 0, 0)
     return ((date - known_recycle_date).days / 7) % 2 < 1
 
 def leds_on(is_recycle_week):
