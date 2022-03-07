@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 import time
 
 us_holidays = holidays.US()
-trash_holidays = [ # only holidays that affect trash pickup
+trash_holidays = set([ # only holidays that affect trash pickup
     'New Year\'s Day',
     'New Year\'s Day (Observed)',
     'Memorial Day',
@@ -17,7 +17,7 @@ trash_holidays = [ # only holidays that affect trash pickup
     'Thanksgiving',
     'Christmas Day',
     'Christmas Day (Observed)'
-]
+])
 known_recycle_date = datetime(2022, 2, 24, 0, 0, 0)
 i2c = board.I2C()
 display = Seg7x4(i2c)
@@ -28,7 +28,7 @@ GPIO.setup(BLUE_LED, GPIO.OUT)
 GPIO.setup(GREEN_LED, GPIO.OUT)
 
 def is_holiday(date):
-    return bool(set(trash_holidays) & set(us_holidays.get_list(date)))
+    return bool(trash_holidays & set(us_holidays.get_list(date)))
 
 def is_recycle_week(date):
     return ((date - known_recycle_date).days / 7) % 2 < 1
